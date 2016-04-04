@@ -2,10 +2,12 @@ package us.awpwo;
 
 public class UF {
 
+	private  int[] sz;
 	protected int[] id;
 	
 	public UF(int N) {
 		id = new int[N];
+		sz = new int[N];
 		for (int i = 0; i < N; ++i) {
 			id[i] = i;
 		}
@@ -29,7 +31,16 @@ public class UF {
 	{
 		int i = root(p);
 		int j = root(q);
-		id[i] = j;
+		if (i == j) return;
+		 if (sz[i] < sz[j]) {
+		 id[i] = j;
+		 sz[j] += sz[i];
+		 }
+		else {
+		 id[j] = i;
+		 sz[i] += sz[j];
+		}
+
 	}
 	
 }
